@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+keys*.txt
+*.llm_api_keys.txt
+.venv/
+*.jsonl
+*.parquet
+*.sqsh

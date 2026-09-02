@@ -1,0 +1,13 @@
+pymongo>=4
+numpy<2
+fasttext-wheel
+huggingface_hub
+pyarrow
+pandas
+matplotlib
+sentencepiece
+datasketch<2
+xxhash
+pytest
+tqdm
+zstandard
