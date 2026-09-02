@@ -11,9 +11,15 @@ the evaluation harness configurations.
 - [`COPA/armstem`](https://huggingface.co/datasets/COPA/armstem) — 373K verified parallel EN–HY STEM problems
 - [`COPA/arm-gemma-e4b`](https://huggingface.co/COPA/arm-gemma-e4b) — Armenian-adapted Gemma-4-E4B
 
+**Start here**: [SETUP.md](SETUP.md) (environment preparation, machine and
+cluster) and [SYSTEM.md](SYSTEM.md) (architecture and stage-by-stage run
+book). The sections below are a condensed overview.
+
 ## Repository layout
 
 ```
+SETUP.md         Environment preparation (single machine + Slurm cluster)
+SYSTEM.md        Architecture and rigorous stage-by-stage run book
 armweb/          Corpus pipeline package (extraction, LID, dedup, splits,
                  decontamination, verification, release building)
 scripts/         Standalone pipeline drivers
@@ -22,9 +28,15 @@ scripts/         Standalone pipeline drivers
   audit_datatrove.py        Independent datasketch dedup audit
   translate/production.py   ArmSTEM translate-and-verify runner (gates G0-G2)
   translate/adequacy_audit.py  Automated adequacy audit
+data_prep/       Source staging: baseline corpora, CPT mixture streams,
+                 STEM shard building, parquet->jsonl, LID reconstruction
 training/        CPT trainers and Slurm templates (HF Trainer, 128 GPUs)
+  megatron_ablations/   410M grid, 70M-1B ladder, 1.3B confirmation,
+                        Megatron preprocessing, eval-panel prep, smoke test
+  tokenizer_ablation/   Vocab extension (+8k/+16k) and E2B CPT arms
 evaluation/      Eval jobs: likelihood suite (lm-eval), ArmBench (lighteval
                  fork), contamination scans, NeMo-Curator cross-check
+  bpb/           Bits-per-byte panel eval (Megatron and HF harnesses)
 tests/           Unit tests for the pipeline package
 ```
 
@@ -123,10 +135,13 @@ takes ~10 h on 128 H100s.
 
 ### 5. Small-scale ablations
 
-The 410M grid, repetition study, and 70M–1B scaling ladder are Megatron-LM
-trainings at Chinchilla-optimal budgets (paper §2.1 and appendices). Their
-Slurm job scripts follow the same template pattern as `training/`; panel
-definitions and evaluation are bits-per-byte over the released splits.
+The 410M grid, repetition study, 70M–1B scaling ladder, and 1.3B
+confirmation are Megatron-LM trainings at Chinchilla-optimal budgets
+(paper §2.1 and appendices); job templates are in
+`training/megatron_ablations/` and the tokenizer-extension study in
+`training/tokenizer_ablation/`. Evaluation is bits-per-byte over a fixed
+panel (`evaluation/bpb/`), which is tokenizer-independent. See SYSTEM.md
+§3–4 for exact submission commands and budgets.
 
 ## Citation
 

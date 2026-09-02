@@ -1,0 +1,72 @@
+# ArmWeb CPT ablation arm A: gemma-4-E2B, stock tokenizer, 2B tokens
+step_scheduler:
+  global_batch_size: 256
+  local_batch_size: 8
+  ckpt_every_steps: 500
+  num_epochs: 1
+  max_steps: 1910    # 256*4096*1910 ~= 2.0B tokens
+
+dist_env:
+  backend: nccl
+  timeout_minutes: 10
+
+model:
+  _target_: nemo_automodel.NeMoAutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: ${ARMWEB_ROOT}/hf_cache/hub/models--google--gemma-4-E2B/snapshots/d29ff6b45f081a49ee2733a859c9c9c2d95d1a6f
+  torch_dtype: bf16
+  force_hf: true
+  use_liger_kernel: false
+  use_sdpa_patching: false
+  attn_implementation: sdpa
+
+checkpoint:
+  enabled: true
+  checkpoint_dir: ${ARMWEB_ROOT}/train/ckpt/cpt_e2b_stock
+  model_save_format: safetensors
+  save_consolidated: true
+
+dataset:
+  _target_: nemo_automodel.components.datasets.llm.megatron_dataset.MegatronPretraining
+  paths:
+    - 0.75
+    - ${ARMWEB_ROOT}/data_train/cpt/megatron/hy_clean_text_document
+    - 0.20
+    - ${ARMWEB_ROOT}/data_train/cpt/megatron/fineweb_edu_text_document
+    - 0.05
+    - ${ARMWEB_ROOT}/data_train/cpt/megatron/stack_smol_text_document
+  index_mapping_dir: ${ARMWEB_ROOT}/data_train/cpt/megatron/mapping
+  tokenizer:
+    _target_: nemo_automodel._transformers.auto_tokenizer.NeMoAutoTokenizer.from_pretrained
+    pretrained_model_name_or_path: ${ARMWEB_ROOT}/hf_cache/hub/models--google--gemma-4-E2B/snapshots/d29ff6b45f081a49ee2733a859c9c9c2d95d1a6f
+  seq_length: 4096
+  seed: 42
+  split: "0.998, 0.002, 0.00"
+  splits_to_build: "train"
+
+dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: torch.utils.data.default_collate
+  dataloader_type: "single"
+
+loss_fn:
+  _target_: nemo_automodel.components.loss.masked_ce.MaskedCrossEntropy
+
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: 1.0e-4
+  betas: [0.9, 0.95]
+  weight_decay: 0.1
+
+distributed:
+  strategy: fsdp2
+  dp_size: none
+  tp_size: 1
+  cp_size: 1
+  pp_size: 1
+  sequence_parallel: false
+  activation_checkpointing: true
+
+lr_scheduler:
+  lr_decay_style: cosine
+  lr_warmup_steps: 100
+  min_lr: 1.0e-5

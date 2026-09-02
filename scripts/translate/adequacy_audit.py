@@ -1,7 +1,7 @@
-import os
 """Automated translation-adequacy audit of ArmSTEM, stratified by
 solver-limited status. Judges EN->HY adequacy on a 1-5 scale with GPT-5.5.
 Usage: adequacy_audit.py <out.json> [n_per_stratum]"""
+import os
 import json
 import random
 import sys

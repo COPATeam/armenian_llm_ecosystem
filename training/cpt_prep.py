@@ -1,5 +1,5 @@
-import os
 """Convert CPT mix sources to text-jsonl for Megatron preprocessing (gemma tokenizer)."""
+import os
 import json
 from pathlib import Path
 import pyarrow.parquet as pq

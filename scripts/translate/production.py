@@ -1,4 +1,3 @@
-import os
 """Production translate-and-verify runner. Resumable, gated, decon-enforced.
 
 Usage: production.py <shard.jsonl> <out_dir> [workers]
@@ -14,6 +13,7 @@ Stages per item:
 Output: <out_dir>/accepted.jsonl (EN+HY parallel), rejected.jsonl, stats.json.
 Resume: ids present in accepted/rejected are skipped on restart.
 """
+import os
 import json
 import sys
 import itertools

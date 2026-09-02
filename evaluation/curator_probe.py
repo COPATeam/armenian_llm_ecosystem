@@ -1,8 +1,8 @@
-import os
 """NeMo-Curator (1.x Ray API) fuzzy-dedup cross-check on ArmWeb post-LID data.
 Usage: curator_probe.py <input.jsonl> <workdir>
 Matched geometry: 112 MinHash perms as 14 bands x 8 rows (J~0.72), on the
 same NFKC signature view our engine used."""
+import os
 import json
 import shutil
 import sys
