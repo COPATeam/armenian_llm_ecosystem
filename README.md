@@ -7,9 +7,9 @@ translate-and-verify pipeline, the continued-pretraining (CPT) recipes, and
 the evaluation harness configurations.
 
 **Released artifacts** (Hugging Face):
-- [`C-O-P-A/armweb`](https://huggingface.co/datasets/C-O-P-A/armweb) — 4.37M-document Armenian news corpus
-- [`C-O-P-A/armstem`](https://huggingface.co/datasets/C-O-P-A/armstem) — 373K verified parallel EN–HY STEM problems
-- [`C-O-P-A/arm-gemma-e4b`](https://huggingface.co/C-O-P-A/arm-gemma-e4b) — Armenian-adapted Gemma-4-E4B
+- [`COPA-AI/armweb`](https://huggingface.co/datasets/COPA-AI/armweb) — 4.37M-document Armenian news corpus
+- [`COPA-AI/armstem`](https://huggingface.co/datasets/COPA-AI/armstem) — 373K verified parallel EN–HY STEM problems
+- [`COPA-AI/arm-gemma-e4b`](https://huggingface.co/COPA-AI/arm-gemma-e4b) — Armenian-adapted Gemma-4-E4B
 
 **Start here**: [SETUP.md](SETUP.md) (environment preparation, machine and
 cluster) and [SYSTEM.md](SYSTEM.md) (architecture and stage-by-stage run
