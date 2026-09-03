@@ -148,7 +148,7 @@ panel (`evaluation/bpb/`), which is tokenizer-independent. See SYSTEM.md
 ```bibtex
 @article{arakelyan2026armweb,
   title  = {From Zero to Hero: An Open LLM Ecosystem for Armenian},
-  author = {Arakelyan, Erik},
+  author = {Arakelyan, Erik and Avetisyan, Khatun and Davtyan, Meri and Grigoryan, Heghine and Khachatryan, Nane and Martirosyan, Vahan and Sergoyan, Henrik and Shahsuvaryan, Hayk},
   year   = {2026},
   note   = {arXiv, forthcoming}
 }
