@@ -8,7 +8,7 @@ the evaluation harness configurations.
 
 **Released artifacts** (Hugging Face):
 - [`COPA-AI/armweb`](https://huggingface.co/datasets/COPA-AI/armweb) — 4.37M-document Armenian news corpus
-- [`COPA-AI/armstem`](https://huggingface.co/datasets/COPA-AI/armstem) — 373K verified parallel EN–HY STEM problems
+- [`COPA-AI/armstem`](https://huggingface.co/datasets/COPA-AI/armstem) — 373K verified parallel EN–HY STEM problems (324K with step-by-step solutions)
 - [`COPA-AI/arm-gemma-e4b`](https://huggingface.co/COPA-AI/arm-gemma-e4b) — Armenian-adapted Gemma-4-E4B
 
 **Start here**: [SETUP.md](SETUP.md) (environment preparation, machine and
@@ -108,7 +108,7 @@ the paper adds a two-annotator native-speaker audit).
 3e-5 with 100 warmup steps, streaming five-way mixture
 `[ArmWeb 0.69, ArmSTEM-HY 0.04, ArmSTEM-EN 0.02, FineWeb-Edu 0.20,
 Stack-smol 0.05]`, seed 42. `cpt_train.py` is the news-only control
-(75/20/5) and `cpt_train_v3a.py` the fresh-corpus control. On clusters with
+(75/20/5) and `cpt_train_v3a.py` the full-corpus control (STEM-CPT-full in the paper). On clusters with
 wall-clock limits, chain segments with `cpt_continue_*.py` (pass the last
 checkpoint, remaining steps, the cosine-schedule LR at the boundary via
 `CONT_LR`, and consumed documents via `SKIP_DOCS`; see the paper's

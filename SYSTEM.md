@@ -237,8 +237,8 @@ packed at 4096, global batch 512 sequences, LR 3e-5 cosine with 100
 warmup steps, seed 42, streaming five-way mixture
 `[ArmWeb 0.69, ArmSTEM-HY 0.04, ArmSTEM-EN 0.02, FineWeb-Edu 0.20,
 Stack-smol 0.05]`. Controls: `cpt_train.py` (news-only 75/20/5, run at
-LR 1e-4 and 3e-5) and `cpt_train_v3a.py` (identical recipe, full-ArmSTEM
-freeze). LR is overridable via the `CPT_LR` environment variable.
+LR 1e-4 and 3e-5) and `cpt_train_v3a.py` (identical recipe, STEM share drawn from the
+full ArmSTEM corpus; STEM-CPT-full in the paper). LR is overridable via the `CPT_LR` environment variable.
 
 ```bash
 # Stage inputs (login node)
@@ -350,5 +350,5 @@ overlap and disagreement Jaccard distribution against the release engine.
    only the released model, required for reproducing the paper).
 4. Stage 4 tokenizer ablation (optional; justifies the stock tokenizer).
 5. Stage 5 CPT: the v2 mixture arm is the released model; news-only and
-   v3a arms reproduce the factorial table.
+   full-corpus (STEM-CPT-full) arms reproduce the factorial table.
 6. Stage 6 evaluations over every arm plus the public baselines.
