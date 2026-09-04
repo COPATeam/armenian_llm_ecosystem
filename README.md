@@ -1,7 +1,7 @@
 # Armenian LLM Ecosystem — reproduction code
 
-Code for the paper **"From Zero to Hero: An Open LLM Ecosystem for Armenian"**
-(arXiv link forthcoming). This repository contains everything needed to
+Code for the paper **["From Zero to Hero: An Open LLM Ecosystem for Armenian"](https://arxiv.org/abs/2609.03350)**
+(arXiv:2609.03350). This repository contains everything needed to
 reproduce the study: the ArmWeb corpus pipeline, the ArmSTEM
 translate-and-verify pipeline, the continued-pretraining (CPT) recipes, and
 the evaluation harness configurations.
@@ -150,6 +150,6 @@ panel (`evaluation/bpb/`), which is tokenizer-independent. See SYSTEM.md
   title  = {From Zero to Hero: An Open LLM Ecosystem for Armenian},
   author = {Arakelyan, Erik and Avetisyan, Khatun and Davtyan, Meri and Grigoryan, Heghine and Khachatryan, Nane and Shahsuvaryan, Hayk and Sergoyan, Henrik and Martirosyan, Vahan},
   year   = {2026},
-  note   = {arXiv, forthcoming}
+  journal = {arXiv preprint arXiv:2609.03350}
 }
 ```
